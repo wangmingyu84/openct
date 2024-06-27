@@ -366,7 +366,7 @@ static int do_verify(ifd_reader_t * reader, int unit, ct_tlv_parser_t * args,
 	ct_tlv_get_int(args, CT_TAG_TIMEOUT, &timeout);
 	if (ct_tlv_get_string(args, CT_TAG_MESSAGE, msgbuf, sizeof(msgbuf)) > 0)
 		message = msgbuf;
-	if (!ct_tlv_get_opaque(args, CT_TAG_PIN_DATA, &data, &data_len))
+	if (!ct_tlv_get_opaque(args, CT_TAG_PIN_DATA, &data, (size_t *)&data_len))
 		return IFD_ERROR_MISSING_ARG;
 
 	rc = ifd_card_perform_verify(reader, unit, timeout, message,
